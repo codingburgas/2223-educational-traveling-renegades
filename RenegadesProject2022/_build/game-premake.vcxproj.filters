@@ -12,9 +12,15 @@
     <ClCompile Include="..\game\src\cppFiles\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\game\src\cppFiles\buttons.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\game\src\headerFiles\header.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\game\src\headerFiles\buttons.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

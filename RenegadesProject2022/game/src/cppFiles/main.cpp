@@ -1,37 +1,87 @@
 #include "../headerFiles/header.h"
-
-struct Ball { // how we will be using structures
-	float x, y;
-	float radius;
-	float speed;
-};
+#include "../headerFiles/buttons.h"
 
 int main() {
-	InitWindow(1000, 800, "Renageds - game"); // how to init a window
-	SetWindowState(FLAG_VSYNC_HINT); // setting fps to the monitors max frame rate
+	InitWindow(1920, 1080, "Renegades - Europia");
+	ToggleFullscreen();
 
-	Texture2D Example = LoadTexture("../textures/example.png"); // how to init a picture
+	bool rulesBut = false;
+	int rulesButCounter = 0;
 
-	Ball ball; // how we will be using structures
-	ball.x = GetScreenWidth() / 2;
-	ball.y = GetScreenHeight() / 2 + 100;
-	ball.radius = 6;
-	ball.speed = 3;
+	bool exitBut = false;
 
-	while (!WindowShouldClose()) {
+	while (!WindowShouldClose() && exitBut == false) {
 		BeginDrawing();
-		ClearBackground(DARKGRAY);
+		ClearBackground(WHITE);
 
-		DrawCircle(ball.x, ball.y, ball.radius, WHITE); // how to draw a texture
+		DrawText("WELCOME TO", GetScreenWidth() / 2 - 680, GetScreenHeight() / 2 - 470, 200, BLACK);
+		DrawText("EUROPIA", GetScreenWidth() / 2 - 460, GetScreenHeight() / 2 - 230, 200, BLACK);
 
-		if (IsKeyDown(KEY_RIGHT)) ball.x += ball.speed;
-		if (IsKeyDown(KEY_LEFT)) ball.x -= ball.speed;
-		if (IsKeyDown(KEY_UP)) ball.y -= ball.speed;
-		if (IsKeyDown(KEY_DOWN)) ball.y += ball.speed;
+		Buttons But;
+		But.width = 350;
+		But.height = 86;
+		But.x = GetScreenWidth() / 2 - But.width / 2;
+		But.y = GetScreenHeight() / 2 - But.height / 2 + 100;
+		But.borW = But.width + 8;
+		But.borH = But.height + 8;
+		But.borX = GetScreenWidth() / 2 - But.borW / 2;
+		But.borY = GetScreenHeight() / 2 - But.borH / 2 + 100;
+		But.TextSize = 40;
+		But.TextX = But.x + But.width / 2 - But.TextSize;
+		But.TextY = But.y + But.height / 2 - But.TextSize / 2;
 
-		DrawTexture(Example, 75, 100, WHITE); // picture init
+		DrawRectangle(But.borX, But.borY, But.borW, But.borH, DARKGRAY);
+		DrawRectangle(But.x, But.y, But.width, But.height, GRAY);
+		DrawText("Play", But.TextX - 3.5, But.TextY, But.TextSize, BLACK);
 
-		DrawFPS(10, 15);
+		DrawRectangle(But.borX, But.borY + 120, But.borW, But.borH, DARKGRAY);
+		DrawRectangle(But.x, But.y + 120, But.width, But.height, GRAY);
+		DrawText("Rules", But.TextX - 14, But.TextY + 120, But.TextSize, BLACK);
+
+		DrawRectangle(But.borX, But.borY + 240, But.borW, But.borH, DARKGRAY);
+		DrawRectangle(But.x, But.y + 240, But.width, But.height, GRAY);
+		DrawText("Exit", But.TextX + 3.5, But.TextY + 240, But.TextSize, BLACK);
+
+
+
+		if (mouseCordsPlay(But.borX, But.borY, But.borX + But.borW, But.borY + But.borH) == true) {
+			DrawRectangle(But.x, But.y, But.width, But.height, LIGHTGRAY);
+			DrawText("Play", But.TextX - 3.5, But.TextY, But.TextSize, BLACK);
+		}
+
+
+
+		if (mouseCordsRules(But.borX, But.borY + 120, But.borX + But.borW, But.borY + 120 + But.borH) == true) {
+			DrawRectangle(But.x, But.y + 120, But.width, But.height, LIGHTGRAY);
+			DrawText("Rules", But.TextX - 14, But.TextY + 120, But.TextSize, BLACK);
+			if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+				rulesButCounter++;
+				if (rulesButCounter % 2 != 0) {
+					rulesBut = true;
+				}
+				else if (rulesButCounter % 2 == 0) {
+					rulesBut = false;
+				}
+			}
+		}
+
+		if (rulesBut == true) {
+			DrawRectangle(But.borX - 500, But.borY, But.borW, But.borH + 240, DARKGRAY);
+			DrawRectangle(But.x - 500, But.y, But.width, But.height + 240, GRAY);
+			DrawText("1. Our first rule is", But.x - 485, But.y + 15, 30, BLACK);
+		}
+
+
+
+		if (mouseCordsExit(But.borX, But.borY + 240, But.borX + But.borW, But.borY + 240 + But.borH) == true) {
+			DrawRectangle(But.x, But.y + 240, But.width, But.height, LIGHTGRAY);
+			DrawText("Exit", But.TextX + 3.5, But.TextY + 240, But.TextSize, BLACK);
+			if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+				exitBut = true;
+			}
+		}
+
+
 
 		EndDrawing();
 	}

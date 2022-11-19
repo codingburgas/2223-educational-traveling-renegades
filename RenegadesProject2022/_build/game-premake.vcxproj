@@ -173,9 +173,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\game\src\cppFiles\buttons.cpp" />
     <ClCompile Include="..\game\src\cppFiles\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\game\src\headerFiles\buttons.h" />
     <ClInclude Include="..\game\src\headerFiles\header.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
