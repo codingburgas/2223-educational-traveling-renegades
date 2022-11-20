@@ -25,7 +25,7 @@
 <p align = "center">
 <img src = "images/c++logo.png" alt = "c++ logo" width =  48px>
 <img src = "images/githublogo.png" alt = "github logo" width = 48px>
-<img src = "images/rayliblogo.png" alt = "raylib logo" width = 48px>
+<img src = "images/rayliblogo.png" alt = "raylib logo">
 <img src = "images/vslogo.png" alt = "visualt studio logo" width = 48px>
 </p>
 
